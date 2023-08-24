@@ -93,14 +93,19 @@ class Datahandler {
             this._Task.splice(foundAt, 1);
         }
     }
-    EditProduts(id, newTasks) {
-        // debugger
-        let found = this._Task.find(c => c.Id == id);
-        found.Title = newTasks.edittitle;
-        found.Detail = newTasks.editdetail;
-        found.Category = newTasks.editprogress;
 
+
+   EditTasks(id, edittitle, editdetail, editprogress) {
+    let found = this._Task.find(task => task.Id == id);
+    if (found) {
+        found.Title = edittitle;
+        found.Detail = editdetail;
+        found.Category = this._Categories.find(category => category.Id == editprogress);
     }
+}
+
+
+
     FindProducts(cid) {
         return this._Task.find(i => i.Id == cid)
     }
@@ -110,23 +115,9 @@ class Datahandler {
         if (categoryid == "string") {
             categoryid = parseInt(categoryid);
         }
-        // const sepcategory  = this._Task.find(z=>z.Id===categoryid);
         const sepcategory = this._Task.filter(z => z.Category.Id == categoryid);
         return sepcategory;
     }
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
